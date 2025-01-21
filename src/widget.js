@@ -80,6 +80,19 @@ class MRTDiscountWidget {
             .sort((a, b) => b.month.localeCompare(a.month));
 
         this.container.innerHTML = `
+            <style>
+                @media screen and (max-width: 768px) {
+                    .code-amount-container {
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        gap: 4px !important;
+                    }
+                    .code-amount-container .amount {
+                        font-size: 14px !important;
+                    }
+                }
+            </style>
             <div id="mrt-discount-codes" class="discount-code-container" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Noto Sans KR', sans-serif;">
                 <div class="discount-header" style="padding-bottom: 15px; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; text-align: center;">
                     <h3 style="color: #333; margin: 0; font-size: 18px; font-weight: 600;">🎫 마이리얼트립 할인코드 목록</h3>
@@ -87,7 +100,7 @@ class MRTDiscountWidget {
                 <div class="discount-table" style="width: 100%; overflow-x: auto;">
                     <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                         <thead>
-                            <tr style="background: #f8f9fa; border-bottom: 2px solid #e9ecef;">
+                            <tr style="background: #f8f9fa;">
                                 <th style="padding: 12px; text-align: center; color: #495057;">날짜</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">할인코드</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">할인금액</th>
@@ -99,16 +112,20 @@ class MRTDiscountWidget {
                                 const [year, month] = code.month.split('-');
                                 const isCurrentMonth = (parseInt(year) === currentYear && parseInt(month) === currentMonth);
                                 return `
-                                    <tr style="border-bottom: ${code.category ? 'none' : '1px solid #e9ecef'}; ${isCurrentMonth ? 'background: #fff3e0;' : ''}">
+                                    <tr style="${isCurrentMonth ? 'background: #fff3e0;' : ''}">
                                         <td style="padding: 12px; text-align: center; color: #495057;">
                                             ${year}년 ${month}월
                                             ${isCurrentMonth ? '<span style="color: #ff5722; font-size: 12px; margin-left: 5px;">사용가능</span>' : ''}
                                         </td>
-                                        <td style="padding: 12px; text-align: center; font-weight: 600; color: #ff5722;">
-                                            ${code.code}
-                                        </td>
-                                        <td style="padding: 12px; text-align: center; color: #495057;">
-                                            ${this.formatNumber(code.description)}
+                                        <td style="padding: 12px; text-align: center;">
+                                            <div class="code-amount-container" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                                <div style="font-weight: 600; color: #ff5722;">
+                                                    ${code.code}
+                                                </div>
+                                                <div class="amount" style="color: #495057;">
+                                                    ${this.formatNumber(code.description)}
+                                                </div>
+                                            </div>
                                         </td>
                                         <td style="padding: 12px; text-align: center;">
                                             <button onclick="discountWidget.copyCode('${code.code}')" style="
@@ -123,9 +140,9 @@ class MRTDiscountWidget {
                                         </td>
                                     </tr>
                                     ${code.category ? `
-                                        <tr style="border-bottom: 1px solid #e9ecef; ${isCurrentMonth ? 'background: #fff3e0;' : ''}">
-                                            <td colspan="4" style="padding: 0 12px 8px 12px;">
-                                                <div style="display: flex; flex-wrap: wrap; gap: 4px; padding-left: 12px;">
+                                        <tr style="${isCurrentMonth ? 'background: #fff3e0;' : ''}">
+                                            <td colspan="4" style="padding: 8px 12px;">
+                                                <div style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;">
                                                     ${code.category.split(',').map(cat => `
                                                         <span style="
                                                             display: inline-block;
