@@ -89,7 +89,11 @@ class MRTDiscountWidget {
                         gap: 4px !important;
                     }
                     .mobile-stack .amount {
-                        font-size: 14px !important;
+                        font-size: 13px !important;
+                        color: #666 !important;
+                    }
+                    .desktop-only {
+                        display: none !important;
                     }
                 }
             </style>
@@ -103,7 +107,7 @@ class MRTDiscountWidget {
                             <tr style="background: #f8f9fa;">
                                 <th style="padding: 12px; text-align: center; color: #495057;">날짜</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">할인코드</th>
-                                <th style="padding: 12px; text-align: center; color: #495057;">할인금액</th>
+                                <th class="desktop-only" style="padding: 12px; text-align: center; color: #495057;">할인금액</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">복사</th>
                             </tr>
                         </thead>
@@ -120,10 +124,12 @@ class MRTDiscountWidget {
                                         <td style="padding: 12px; text-align: center; font-weight: 600; color: #ff5722;">
                                             <div class="mobile-stack">
                                                 ${code.code}
-                                                <span class="amount" style="color: #495057;">${this.formatNumber(code.description)}</span>
+                                                <div class="amount">
+                                                    ${this.formatNumber(code.description)}
+                                                </div>
                                             </div>
                                         </td>
-                                        <td style="padding: 12px; text-align: center; color: #495057;" class="desktop-only">
+                                        <td class="desktop-only" style="padding: 12px; text-align: center; color: #495057;">
                                             ${this.formatNumber(code.description)}
                                         </td>
                                         <td style="padding: 12px; text-align: center;">
@@ -141,7 +147,7 @@ class MRTDiscountWidget {
                                     ${code.category ? `
                                         <tr style="${isCurrentMonth ? 'background: #fff3e0;' : ''}">
                                             <td colspan="4" style="padding: 8px 12px;">
-                                                <div style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;">
+                                                <div style="display: flex; flex-wrap: wrap; gap: 4px; padding-left: 12px;">
                                                     ${code.category.split(',').map(cat => `
                                                         <span style="
                                                             display: inline-block;
