@@ -87,7 +87,7 @@ class MRTDiscountWidget {
                 <div class="discount-table" style="width: 100%; overflow-x: auto;">
                     <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                         <thead>
-                            <tr style="background: #f8f9fa; border-bottom: 2px solid #e9ecef;">
+                            <tr style="background: #f8f9fa;">
                                 <th style="padding: 12px; text-align: center; color: #495057;">날짜</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">할인코드</th>
                                 <th style="padding: 12px; text-align: center; color: #495057;">할인금액</th>
@@ -99,7 +99,7 @@ class MRTDiscountWidget {
                                 const [year, month] = code.month.split('-');
                                 const isCurrentMonth = (parseInt(year) === currentYear && parseInt(month) === currentMonth);
                                 return `
-                                    <tr style="border-bottom: ${code.category ? 'none' : '1px solid #e9ecef'}; ${isCurrentMonth ? 'background: #fff3e0;' : ''}">
+                                    <tr style="${isCurrentMonth ? 'background: #fff3e0;' : ''}">
                                         <td style="padding: 12px; text-align: center; color: #495057;">
                                             ${year}년 ${month}월
                                             ${isCurrentMonth ? '<span style="color: #ff5722; font-size: 12px; margin-left: 5px;">사용가능</span>' : ''}
@@ -123,8 +123,8 @@ class MRTDiscountWidget {
                                         </td>
                                     </tr>
                                     ${code.category ? `
-                                        <tr style="border-bottom: 1px solid #e9ecef; ${isCurrentMonth ? 'background: #fff3e0;' : ''}">
-                                            <td colspan="4" style="padding: 0 12px 8px 12px;">
+                                        <tr style="${isCurrentMonth ? 'background: #fff3e0;' : ''};border-bottom: 1px solid #f0f0f0;">
+                                            <td colspan="4" style="padding: 8px 12px;">
                                                 <div style="display: flex; flex-wrap: wrap; gap: 4px; padding-left: 12px;">
                                                     ${code.category.split(',').map(cat => `
                                                         <span style="
