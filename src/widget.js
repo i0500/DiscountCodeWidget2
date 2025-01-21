@@ -82,13 +82,13 @@ class MRTDiscountWidget {
         this.container.innerHTML = `
             <style>
                 @media screen and (max-width: 768px) {
-                    .code-amount-container {
+                    .mobile-stack {
                         display: flex !important;
                         flex-direction: column !important;
                         align-items: center !important;
                         gap: 4px !important;
                     }
-                    .code-amount-container .amount {
+                    .mobile-stack .amount {
                         font-size: 14px !important;
                     }
                 }
@@ -117,15 +117,14 @@ class MRTDiscountWidget {
                                             ${year}년 ${month}월
                                             ${isCurrentMonth ? '<span style="color: #ff5722; font-size: 12px; margin-left: 5px;">사용가능</span>' : ''}
                                         </td>
-                                        <td style="padding: 12px; text-align: center;">
-                                            <div class="code-amount-container" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                                <div style="font-weight: 600; color: #ff5722;">
-                                                    ${code.code}
-                                                </div>
-                                                <div class="amount" style="color: #495057;">
-                                                    ${this.formatNumber(code.description)}
-                                                </div>
+                                        <td style="padding: 12px; text-align: center; font-weight: 600; color: #ff5722;">
+                                            <div class="mobile-stack">
+                                                ${code.code}
+                                                <span class="amount" style="color: #495057;">${this.formatNumber(code.description)}</span>
                                             </div>
+                                        </td>
+                                        <td style="padding: 12px; text-align: center; color: #495057;" class="desktop-only">
+                                            ${this.formatNumber(code.description)}
                                         </td>
                                         <td style="padding: 12px; text-align: center;">
                                             <button onclick="discountWidget.copyCode('${code.code}')" style="
