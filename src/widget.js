@@ -36,6 +36,29 @@ class MRTDiscountWidget {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
     }
 
+    getCategoryColor(category) {
+        const categoryColors = {
+            '숙소': '#4CAF50',
+            '한인민박': '#4CAF50',
+            '호텔': '#4CAF50',
+            '리조트': '#4CAF50',
+            '투어': '#2196F3',
+            '티켓': '#2196F3',
+            '액티비티': '#2196F3',
+            '클래스': '#2196F3',
+            '전 세계': '#9C27B0',
+            '해외': '#9C27B0',
+            '5만원 이상': '#FF9800',
+            '7만원 이상': '#FF9800',
+            '10만원 이상': '#FF9800',
+            '20만원 이상': '#FF9800',
+            '여행편의': '#757575',
+            '여행편의 상품': '#757575',
+            '전체': '#607D8B'
+        };
+        return categoryColors[category.trim()] || '#757575';
+    }
+
     copyCode(code) {
         navigator.clipboard.writeText(code).then(() => {
             alert('할인코드가 복사되었습니다!');
@@ -57,7 +80,7 @@ class MRTDiscountWidget {
             .sort((a, b) => b.month.localeCompare(a.month));
 
         this.container.innerHTML = `
-            <div class="discount-code-container" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Noto Sans KR', sans-serif;">
+            <div id="mrt-discount-codes" class="discount-code-container" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Noto Sans KR', sans-serif;">
                 <div class="discount-header" style="padding-bottom: 15px; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; text-align: center;">
                     <h3 style="color: #333; margin: 0; font-size: 18px; font-weight: 600;">🎫 마이리얼트립 할인코드 목록</h3>
                 </div>
@@ -124,29 +147,6 @@ class MRTDiscountWidget {
                 </div>
             </div>
         `;
-    }
-
-    getCategoryColor(category) {
-        const categoryColors = {
-            '숙소': '#4CAF50',
-            '한인민박': '#4CAF50',
-            '호텔': '#4CAF50',
-            '리조트': '#4CAF50',
-            '투어': '#2196F3',
-            '티켓': '#2196F3',
-            '액티비티': '#2196F3',
-            '클래스': '#2196F3',
-            '전 세계': '#9C27B0',
-            '해외': '#9C27B0',
-            '5만원 이상': '#FF9800',
-            '7만원 이상': '#FF9800',
-            '10만원 이상': '#FF9800',
-            '20만원 이상': '#FF9800',
-            '여행편의': '#757575',
-            '여행편의 상품': '#757575',
-            '전체': '#607D8B'
-        };
-        return categoryColors[category] || '#757575';
     }
 
     renderError(message = '할인코드를 불러오는데 실패했습니다.') {
