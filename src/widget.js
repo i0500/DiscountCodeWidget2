@@ -89,6 +89,7 @@ class MRTDiscountWidget {
                         gap: 4px !important;
                     }
                     .mobile-stack .amount {
+                        display: block !important;
                         font-size: 13px !important;
                         color: #666 !important;
                     }
@@ -121,10 +122,10 @@ class MRTDiscountWidget {
                                             ${year}년 ${month}월
                                             ${isCurrentMonth ? '<span style="color: #ff5722; font-size: 12px; margin-left: 5px;">사용가능</span>' : ''}
                                         </td>
-                                        <td style="padding: 12px; text-align: center; font-weight: 600; color: #ff5722;">
+                                        <td style="padding: 12px; text-align: center;">
                                             <div class="mobile-stack">
-                                                ${code.code}
-                                                <div class="amount">
+                                                <div style="font-weight: 600; color: #ff5722;">${code.code}</div>
+                                                <div class="amount" style="display: none;">
                                                     ${this.formatNumber(code.description)}
                                                 </div>
                                             </div>
