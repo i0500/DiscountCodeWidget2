@@ -79,6 +79,21 @@ class MRTDiscountWidget {
             })
             .sort((a, b) => b.month.localeCompare(a.month));
 
+        // 사용 가능한 할인코드가 없을 때
+        if (validCodes.length === 0) {
+            this.container.innerHTML = `
+                <div id="mrt-discount-codes" class="discount-code-container" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Noto Sans KR', sans-serif;">
+                    <div class="discount-header" style="padding-bottom: 15px; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; text-align: center;">
+                        <h3 style="color: #333; margin: 0; font-size: 18px; font-weight: 600;">🎫 마이리얼트립 할인코드 목록</h3>
+                    </div>
+                    <div style="text-align: center; padding: 40px 20px; color: #666;">
+                        현재 사용 가능한 할인코드가 없습니다.
+                    </div>
+                </div>
+            `;
+            return;
+        }
+        
         this.container.innerHTML = `
             <div id="mrt-discount-codes" class="discount-code-container" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Noto Sans KR', sans-serif;">
                 <div class="discount-header" style="padding-bottom: 15px; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; text-align: center;">
